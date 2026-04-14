@@ -579,6 +579,7 @@ for more information."
 
 (defvar-local cognitive-complexity--ovs nil
   "List of overlays.")
+(put 'cognitive-complexity--ovs 'permanent-local t)
 
 (defcustom cognitive-complexity-priority 100
   "Overlays' priority."
@@ -664,7 +665,8 @@ SCOPE defaults to `cognitive-complexity-display' when not specified."
 
 (defun cognitive-complexity--delete-ovs ()
   "Clean up all overlays."
-  (mapc #'delete-overlay cognitive-complexity--ovs))
+  (mapc #'delete-overlay cognitive-complexity--ovs)
+  (setq cognitive-complexity--ovs nil))
 
 (defun cognitive-complexity--display-start (buffer)
   "Display result in BUFFER."
